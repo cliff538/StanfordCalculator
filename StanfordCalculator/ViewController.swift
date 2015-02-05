@@ -11,11 +11,23 @@ import UIKit
 // inherits from SuperClass (in blue) UIViewController.
 class ViewController: UIViewController {
 
-	// instance variable
+	// instance variable or property.
 	@IBOutlet weak var display: UILabel!
+	
+	var userIsInTheMiddleOfTypingANumber: Bool = false
 
-	// method or function
+	// method or function. name is sender, that is how you access it. Type is UIButton.
 	@IBAction func appendDigit(sender: UIButton) {
+		
+		let digit = sender.currentTitle!
+		
+		if userIsInTheMiddleOfTypingANumber {
+				display.text = display.text! + digit
+		} else {
+				display.text = digit
+				userIsInTheMiddleOfTypingANumber = true
+		}
+		
 	}
 
 }
