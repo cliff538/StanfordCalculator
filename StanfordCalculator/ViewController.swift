@@ -11,7 +11,9 @@ import UIKit
 // inherits from SuperClass (in blue) UIViewController.
 class ViewController: UIViewController {
 
-	// instance variable or property.
+	// instance variable or property. UILabel != a implecitly unwrapped optional
+	// we don't have to unwrap every time we use it. Hence, no ! after var display
+	// down in the method appendDigit.
 	@IBOutlet weak var display: UILabel!
 	
 	var userIsInTheMiddleOfTypingANumber: Bool = false
@@ -30,5 +32,26 @@ class ViewController: UIViewController {
 		
 	}
 
+	@IBAction func operate(sender: UIButton) {
+		let operation = sender.currentTitle!
+	}
+	var operandStack = Array<Double>()
+	
+	@IBAction func enter() {
+		userIsInTheMiddleOfTypingANumber = false
+		operandStack.append(displayValue)
+		println("operandStack = \(operandStack)")
+		
+	}
+	
+	var displayValue: Double {
+		get {
+			return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+		}
+		set {
+			display.text = "\(newValue)"
+			userIsInTheMiddleOfTypingANumber = false
+		}
+	}
 }
 
